@@ -15,6 +15,10 @@ public class main extends JavaPlugin implements Listener{
 	
 	private Selector selector;
 	CustomConfig selectorconfig = new CustomConfig(this, "selector.yml");
+	
+	private Launchpads launchpads;
+	CustomConfig launchpadsconfig = new CustomConfig(this, "launchpads.yml");
+	
 	String prefix = "";
 	
 	public void onEnable(){
@@ -29,12 +33,26 @@ public class main extends JavaPlugin implements Listener{
         getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
         
 		
-		selector = new Selector(this);
 		setupSelector();
+		setupLaunchpads();
 		
 	}
 	
+	public void setupLaunchpads(){
+		launchpads = new Launchpads(this);
+    	launchpadsconfig.createIfNoExist();
+		if(!launchpadsconfig.getConfig().getString("enabled").equalsIgnoreCase("false")){
+			Bukkit.getPluginManager().registerEvents(launchpads, this);
+			Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
+	            public void run() {
+	    	    	launchpads.setup();
+	                  }
+	          }, 5L);	
+		}
+	}
+	
 	public void setupSelector(){
+		selector = new Selector(this);
     	selectorconfig.createIfNoExist();
 		if(!selectorconfig.getConfig().getString("enabled").equalsIgnoreCase("false")){
 			Bukkit.getPluginManager().registerEvents(selector, this);

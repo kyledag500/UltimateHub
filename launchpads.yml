@@ -1,0 +1,28 @@
+#Should launchpads be enabled?
+enabled: true
+
+#What should the launchpad template be?#
+#MAIN: What should the main block be?
+#FIRST: What should be the block directly under the player's feet?
+#SECOND: What block should be 2 blocks below the player?
+#USES http://jd.bukkit.org/rb/apidocs/org/bukkit/Material.html#
+################################################################
+main: STONE_PLATE
+first: REDSTONE_BLOCK
+second: SPONGE
+
+#What should the UPWARD velocity be?
+upward: 2
+
+#What should the MULTIPLY velocity be?
+multiply: 4
+
+#What sound should be played when launched?
+# http://jd.bukkit.org/rb/apidocs/org/bukkit/Sound.html
+# Disable with 'none'
+sound: ENDERDRAGON_HIT
+
+#What effect should play?
+# http://jd.bukkit.org/rb/apidocs/org/bukkit/Effect.html
+# Disable with 'none'
+effect: ENDER_SIGNAL

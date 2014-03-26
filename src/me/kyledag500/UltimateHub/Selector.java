@@ -40,7 +40,7 @@ public class Selector implements Listener{
 	public void setupSelector(){
 		addEnchants();
     	String[] type = selector.getConfig().getString("selector.type").split(":");
-    	item = new ItemStack(Material.valueOf(type[0]), 1, Short.parseShort(type[1]));
+    	item = new ItemStack(Material.valueOf(type[0].toUpperCase()), 1, Short.parseShort(type[1]));
     	ItemMeta im = item.getItemMeta();
     	im.setDisplayName(selector.getConfig().getString("selector.displayName").replace("&", "§"));
     	ArrayList<String> lore = new ArrayList<String>();
@@ -92,7 +92,7 @@ public class Selector implements Listener{
 		Inventory main = Bukkit.createInventory(null, Integer.parseInt(selector.getConfig().getString("menuSize")), selector.getConfig().getString("menuTitle").replace("&", "§"));
 		for(String i : selector.getConfig().getStringList("items")){
 			String[] type = selector.getConfig().getString(i + ".type").split(":");
-			ItemStack item = new ItemStack(Material.valueOf(type[0]), selector.getConfig().getInt(i + ".amount"), Short.parseShort(type[1]));
+			ItemStack item = new ItemStack(Material.valueOf(type[0].toUpperCase()), selector.getConfig().getInt(i + ".amount"), Short.parseShort(type[1]));
 			ItemMeta im = item.getItemMeta();
 			im.setDisplayName(selector.getConfig().getString(i + ".displayName").replace("&", "§"));
 	    	ArrayList<String> lore = new ArrayList<String>();
@@ -121,7 +121,7 @@ public class Selector implements Listener{
 						ItemStack citem = event.getCurrentItem();
 						for(String i : selector.getConfig().getStringList("items")){
 							String[] type = selector.getConfig().getString(i + ".type").split(":");
-							ItemStack item = new ItemStack(Material.valueOf(type[0]), selector.getConfig().getInt(i + ".amount"), Short.parseShort(type[1]));
+							ItemStack item = new ItemStack(Material.valueOf(type[0].toUpperCase()), selector.getConfig().getInt(i + ".amount"), Short.parseShort(type[1]));
 							ItemMeta im = item.getItemMeta();
 							im.setDisplayName(selector.getConfig().getString(i + ".displayName").replace("&", "§"));
 					    	ArrayList<String> lore = new ArrayList<String>();
