@@ -1,0 +1,59 @@
+#A list of Materials for bukkit can be found here:
+# http://jd.bukkit.org/rb/apidocs/org/bukkit/Material.html
+
+#Should the server selector be enabled?
+enabled: 'true'
+
+#What should the menu say at the top?
+menuTitle: '&4Select a Server'
+
+#How many slots should the menu be? INCRAMENTS OF 9
+menuSize: '9'
+
+#What slot should the item be added in the inventory when joining?
+giveSlot: '1'
+
+#List of items. (Just random names)
+items:
+- '1'
+- '2'
+
+#What does the selector item look like?
+selector:
+  type: COMPASS:0
+  glow: 'false'
+  displayName: '&4Server Selector'
+  lore:
+  - '&4Click me to select a server!'
+
+#Items. Use one of these for each item in the list above.
+#EXAMPLE:
+#type: Use Bukkit item name. Then use a ":", followed by the damage value(0 for normal)
+#slot: Slot in the menu it should be added in. (1st slot is '0')
+#amount: Amount in stack
+#glow: True/False. Should it have a glow effect?
+#displayname: What is the name of the item?
+#lore: The description for the item(below the name when hovering).
+#server: Which server does it TP to? (Bungee name)
+#message: What will the server tell them when they are TP'd?
+#
+'1':
+  type: DIAMOND_SWORD:0
+  slot: '1'
+  amount: '1'
+  glow: 'false'
+  displayName: '&4Factions'
+  lore:
+  - 'PVP, Raiding, and MORE!'
+  server: factions
+  message: '&1Sending you to the factions server!'
+'2':
+  type: IRON_FENCE:0
+  slot: '2'
+  amount: '1'
+  glow: 'false'
+  displayName: '&3Prison'
+  lore:
+  - 'THE BEST PRISON SERVER'
+  server: prison
+  message: '&1Sending you to the prison server!'
