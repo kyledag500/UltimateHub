@@ -156,7 +156,7 @@ public class Selector implements Listener{
             public void run() {
             	giveSelector(player);
                   }
-          }, 3L);
+          }, 5L);
 	}
 	
 	@EventHandler

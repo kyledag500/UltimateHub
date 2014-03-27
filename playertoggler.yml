@@ -1,0 +1,40 @@
+#This config controls the device that toggles players on/off.
+# Materials: http://jd.bukkit.org/rb/apidocs/org/bukkit/Material.html
+
+#Enable the player toggler?
+enabled: 'true'
+
+#Which slot should it be put in?
+slot: 2
+
+#Message when spamming
+spamMessage: '&4&lPLEASE SLOW DOWN! &cYou may only use this every 5 seconds.'
+
+#Minimum time between usage(in seconds)
+cooldown: 5
+
+#Toggle Off Information
+'off':
+  type: 'SLIME_BALL:0'
+  displayName: '&aPlayers Visible. &4Turn OFF players'
+  lore:
+  - ' '
+  - '&aUseful for people with frame issues'
+  message: '&aAll players visible.'
+'on':
+  type: 'MAGMA_CREAM:0'
+  displayName: '&4Players Hidden. &aTurn ON players'
+  lore:
+  - ' '
+  - '&aUseful for people with frame issues'
+  message: '&cPlayers hidden.'
+     
+#What sound to play when toggling players?
+# http://jd.bukkit.org/rb/apidocs/org/bukkit/Sound.html
+# Disable with 'none'
+sound: 'LEVEL_UP'
+
+#Which effect to play when toggling players?
+# http://jd.bukkit.org/rb/apidocs/org/bukkit/Effect.html
+# Disable with 'none'
+effect: 'MOBSPAWNER_FLAMES'

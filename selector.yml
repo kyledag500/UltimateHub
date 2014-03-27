@@ -21,7 +21,6 @@ items:
 #What does the selector item look like?
 selector:
   type: COMPASS:0
-  glow: 'false'
   displayName: '&4Server Selector'
   lore:
   - '&4Click me to select a server!'
