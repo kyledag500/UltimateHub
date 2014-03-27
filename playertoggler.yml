@@ -34,7 +34,7 @@ cooldown: 5
 # Disable with 'none'
 sound: 'LEVEL_UP'
 
-#Which effect to play when toggling players?
+#Which effect to play when toggling players? Plays at location of each player.
 # http://jd.bukkit.org/rb/apidocs/org/bukkit/Effect.html
 # Disable with 'none'
 effect: 'MOBSPAWNER_FLAMES'
