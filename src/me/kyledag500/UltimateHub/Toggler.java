@@ -136,6 +136,11 @@ public class Toggler implements Listener {
 		Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(main, new Runnable() {
             public void run() {
             	giveOff(player);
+            	for(Player p : Bukkit.getOnlinePlayers()){
+            		if(p.getInventory().contains(on)){
+            			p.hidePlayer(player);
+            		}
+            	}
                   }
           }, 5L);
 	}
