@@ -44,7 +44,7 @@ public class Toggler implements Listener {
     	om.setDisplayName(ChatColor.translateAlternateColorCodes('&', toggler.getConfig().getString("off.displayName")));
     	ArrayList<String> lore = new ArrayList<String>();
     	for(String l : toggler.getConfig().getStringList("off.lore")){
-    		lore.add(l.replace("&", "§"));
+    		lore.add(ChatColor.translateAlternateColorCodes('&', l));
     	}
     	om.setLore(lore);
     	off.setItemMeta(om);
@@ -55,7 +55,7 @@ public class Toggler implements Listener {
     	nm.setDisplayName(ChatColor.translateAlternateColorCodes('&', toggler.getConfig().getString("on.displayName")));
     	ArrayList<String> onlore = new ArrayList<String>();
     	for(String l : toggler.getConfig().getStringList("on.lore")){
-    		onlore.add(l.replace("&", "§"));
+    		onlore.add(ChatColor.translateAlternateColorCodes('&', l));
     	}
     	nm.setLore(onlore);
     	on.setItemMeta(nm);

@@ -47,7 +47,7 @@ public class Selector implements Listener{
     	im.setDisplayName(ChatColor.translateAlternateColorCodes('&', selector.getConfig().getString("selector.displayName")));
     	ArrayList<String> lore = new ArrayList<String>();
     	for(String l : selector.getConfig().getStringList("selector.lore")){
-    		lore.add(l.replace("&", "§"));
+    		lore.add(ChatColor.translateAlternateColorCodes('&', l));
     	}
     	im.setLore(lore);
     	item.setItemMeta(im);
@@ -99,7 +99,7 @@ public class Selector implements Listener{
 			im.setDisplayName(ChatColor.translateAlternateColorCodes('&', selector.getConfig().getString(i + ".displayName")));
 	    	ArrayList<String> lore = new ArrayList<String>();
 	    	for(String l : selector.getConfig().getStringList(i + ".lore")){
-	    		lore.add(l.replace("&", "§"));
+	    		lore.add(ChatColor.translateAlternateColorCodes('&', l));
 	    	}
 	    	im.setLore(lore);
 	    	item.setItemMeta(im);
@@ -128,7 +128,7 @@ public class Selector implements Listener{
 							im.setDisplayName(ChatColor.translateAlternateColorCodes('&', selector.getConfig().getString(i + ".displayName")));
 					    	ArrayList<String> lore = new ArrayList<String>();
 					    	for(String l : selector.getConfig().getStringList(i + ".lore")){
-					    		lore.add(l.replace("&", "§"));
+					    		lore.add(ChatColor.translateAlternateColorCodes('&', l));
 					    	}
 					    	im.setLore(lore);
 					    	item.setItemMeta(im);
@@ -136,7 +136,7 @@ public class Selector implements Listener{
 					    		item.addUnsafeEnchantment(glow, 1);
 					    	}
 					    	if(citem.isSimilar(item)){
-					    		teleToServer(player, main.prefix + selector.getConfig().getString(i + ".message").replace("&", "§"), ChatColor.translateAlternateColorCodes('&', selector.getConfig().getString(i + ".server")));
+					    		teleToServer(player, main.prefix + ChatColor.translateAlternateColorCodes('&', selector.getConfig().getString(i + ".message")), ChatColor.translateAlternateColorCodes('&', selector.getConfig().getString(i + ".server")));
 					    	}
 						}
 					}
