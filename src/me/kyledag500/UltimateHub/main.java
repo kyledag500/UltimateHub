@@ -3,6 +3,7 @@ package me.kyledag500.UltimateHub;
 import java.util.ArrayList;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -33,7 +34,7 @@ public class main extends JavaPlugin implements Listener{
 		getConfig().options().copyDefaults(true);
 		saveConfig();
 		
-		prefix = getConfig().getString("prefix").replace("&", "§") + " ";
+		prefix = ChatColor.translateAlternateColorCodes('&', getConfig().getString("prefix")) + " ";
 		
 		Bukkit.getPluginManager().registerEvents(this, this);		
         getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");

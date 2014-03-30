@@ -4,6 +4,7 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Effect;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -40,7 +41,7 @@ public class Toggler implements Listener {
     	String[] offtype = toggler.getConfig().getString("off.type").split(":");
     	off = new ItemStack(Material.valueOf(offtype[0].toUpperCase()), 1, Short.parseShort(offtype[1]));
     	ItemMeta om = off.getItemMeta();
-    	om.setDisplayName(toggler.getConfig().getString("off.displayName").replace("&", "§"));
+    	om.setDisplayName(ChatColor.translateAlternateColorCodes('&', toggler.getConfig().getString("off.displayName")));
     	ArrayList<String> lore = new ArrayList<String>();
     	for(String l : toggler.getConfig().getStringList("off.lore")){
     		lore.add(l.replace("&", "§"));
@@ -51,7 +52,7 @@ public class Toggler implements Listener {
     	String[] ontype = toggler.getConfig().getString("on.type").split(":");
     	on = new ItemStack(Material.valueOf(ontype[0].toUpperCase()), 1, Short.parseShort(ontype[1]));
     	ItemMeta nm = on.getItemMeta();
-    	nm.setDisplayName(toggler.getConfig().getString("on.displayName").replace("&", "§"));
+    	nm.setDisplayName(ChatColor.translateAlternateColorCodes('&', toggler.getConfig().getString("on.displayName")));
     	ArrayList<String> onlore = new ArrayList<String>();
     	for(String l : toggler.getConfig().getStringList("on.lore")){
     		onlore.add(l.replace("&", "§"));
@@ -71,7 +72,7 @@ public class Toggler implements Listener {
 			if(!toggler.getConfig().getString("sound").equalsIgnoreCase("none")){
 				player.playSound(player.getLocation(), Sound.valueOf(toggler.getConfig().getString("sound").toUpperCase()), 1, 1);
 			}
-			player.sendMessage(prefix + toggler.getConfig().getString("off.message").replace("&", "§"));
+			player.sendMessage(prefix + ChatColor.translateAlternateColorCodes('&', toggler.getConfig().getString("off.message")));
 			Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(main, new Runnable() {
 	            public void run() {
 	    			player.getInventory().setItem(Integer.parseInt(toggler.getConfig().getString("slot")), off);
@@ -86,7 +87,7 @@ public class Toggler implements Listener {
 	                  }
 	          }, (Integer.parseInt(toggler.getConfig().getString("cooldown")) * 20));
 		}else{
-			player.sendMessage(prefix + toggler.getConfig().getString("spamMessage").replace("&", "§"));
+			player.sendMessage(prefix + ChatColor.translateAlternateColorCodes('&', toggler.getConfig().getString("spamMessage")));
 
 		}
 	}
@@ -102,7 +103,7 @@ public class Toggler implements Listener {
 			if(!toggler.getConfig().getString("sound").equalsIgnoreCase("none")){
 				player.playSound(player.getLocation(), Sound.valueOf(toggler.getConfig().getString("sound").toUpperCase()), 1, 1);
 			}
-			player.sendMessage(prefix + toggler.getConfig().getString("on.message").replace("&", "§"));
+			player.sendMessage(prefix + ChatColor.translateAlternateColorCodes('&', toggler.getConfig().getString("on.message")));
 			Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(main, new Runnable() {
 	            public void run() {
 	    			player.getInventory().setItem(Integer.parseInt(toggler.getConfig().getString("slot")), on);
@@ -118,7 +119,7 @@ public class Toggler implements Listener {
 	          }, (Integer.parseInt(toggler.getConfig().getString("cooldown")) * 20));
 		}
 		else{
-			player.sendMessage(prefix + toggler.getConfig().getString("spamMessage").replace("&", "§"));
+			player.sendMessage(prefix + ChatColor.translateAlternateColorCodes('&', toggler.getConfig().getString("spamMessage")));
 		}
 	}
 	

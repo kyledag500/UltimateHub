@@ -8,7 +8,9 @@ import java.util.ArrayList;
 
 
 
+
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.enchantments.EnchantmentWrapper;
@@ -42,7 +44,7 @@ public class Selector implements Listener{
     	String[] type = selector.getConfig().getString("selector.type").split(":");
     	item = new ItemStack(Material.valueOf(type[0].toUpperCase()), 1, Short.parseShort(type[1]));
     	ItemMeta im = item.getItemMeta();
-    	im.setDisplayName(selector.getConfig().getString("selector.displayName").replace("&", "§"));
+    	im.setDisplayName(ChatColor.translateAlternateColorCodes('&', selector.getConfig().getString("selector.displayName")));
     	ArrayList<String> lore = new ArrayList<String>();
     	for(String l : selector.getConfig().getStringList("selector.lore")){
     		lore.add(l.replace("&", "§"));
@@ -89,12 +91,12 @@ public class Selector implements Listener{
 	}
 	
 	public void openMenu(Player player){
-		Inventory main = Bukkit.createInventory(null, Integer.parseInt(selector.getConfig().getString("menuSize")), selector.getConfig().getString("menuTitle").replace("&", "§"));
+		Inventory main = Bukkit.createInventory(null, Integer.parseInt(selector.getConfig().getString("menuSize")), ChatColor.translateAlternateColorCodes('&', selector.getConfig().getString("menuTitle")));
 		for(String i : selector.getConfig().getStringList("items")){
 			String[] type = selector.getConfig().getString(i + ".type").split(":");
 			ItemStack item = new ItemStack(Material.valueOf(type[0].toUpperCase()), selector.getConfig().getInt(i + ".amount"), Short.parseShort(type[1]));
 			ItemMeta im = item.getItemMeta();
-			im.setDisplayName(selector.getConfig().getString(i + ".displayName").replace("&", "§"));
+			im.setDisplayName(ChatColor.translateAlternateColorCodes('&', selector.getConfig().getString(i + ".displayName")));
 	    	ArrayList<String> lore = new ArrayList<String>();
 	    	for(String l : selector.getConfig().getStringList(i + ".lore")){
 	    		lore.add(l.replace("&", "§"));
@@ -115,7 +117,7 @@ public class Selector implements Listener{
 			Player player = (Player) event.getWhoClicked();
 			if(event.getInventory() != null){
 				Inventory inv = event.getInventory();
-				if(inv.getName().equalsIgnoreCase(selector.getConfig().getString("menuTitle").replace("&", "§"))){
+				if(inv.getName().equalsIgnoreCase(ChatColor.translateAlternateColorCodes('&', selector.getConfig().getString("menuTitle")))){
 					event.setCancelled(true);
 					if(event.getCurrentItem() != null){
 						ItemStack citem = event.getCurrentItem();
@@ -123,7 +125,7 @@ public class Selector implements Listener{
 							String[] type = selector.getConfig().getString(i + ".type").split(":");
 							ItemStack item = new ItemStack(Material.valueOf(type[0].toUpperCase()), selector.getConfig().getInt(i + ".amount"), Short.parseShort(type[1]));
 							ItemMeta im = item.getItemMeta();
-							im.setDisplayName(selector.getConfig().getString(i + ".displayName").replace("&", "§"));
+							im.setDisplayName(ChatColor.translateAlternateColorCodes('&', selector.getConfig().getString(i + ".displayName")));
 					    	ArrayList<String> lore = new ArrayList<String>();
 					    	for(String l : selector.getConfig().getStringList(i + ".lore")){
 					    		lore.add(l.replace("&", "§"));
@@ -134,7 +136,7 @@ public class Selector implements Listener{
 					    		item.addUnsafeEnchantment(glow, 1);
 					    	}
 					    	if(citem.isSimilar(item)){
-					    		teleToServer(player, main.prefix + selector.getConfig().getString(i + ".message").replace("&", "§"), selector.getConfig().getString(i + ".server"));
+					    		teleToServer(player, main.prefix + selector.getConfig().getString(i + ".message").replace("&", "§"), ChatColor.translateAlternateColorCodes('&', selector.getConfig().getString(i + ".server")));
 					    	}
 						}
 					}
