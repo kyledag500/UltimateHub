@@ -38,7 +38,7 @@ public class CustomConfig {
        
        
         public boolean createIfNoExist() {
-                configFile = new File(this.plugin.getDataFolder(), this.configName);
+                configFile = new File(this.plugin.getDataFolder(), this.configName.replace("/", " + " + File.separator + " + "));
                 if(!this.configFile.exists()) {
                         if(this.plugin.getResource(configName) != null) {
                                 this.plugin.saveResource(configName, false);

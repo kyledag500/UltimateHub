@@ -26,6 +26,7 @@ public class Toggler implements Listener {
 	main main;
 	public Plugin thisplugin;
 	CustomConfig toggler = null;
+	CustomConfig players = null;
 	ArrayList<Player> cooldown = new ArrayList<Player>();
 	ItemStack off = null;
 	ItemStack on = null;
@@ -35,9 +36,11 @@ public class Toggler implements Listener {
 		this.main = plugin;
 		toggler = main.togglerconfig;
 		prefix = main.prefix;
+		players = main.players;
 	}
 	
 	public void setup(){
+		Bukkit.broadcastMessage("TEST");
     	String[] offtype = toggler.getConfig().getString("off.type").split(":");
     	off = new ItemStack(Material.valueOf(offtype[0].toUpperCase()), 1, Short.parseShort(offtype[1]));
     	ItemMeta om = off.getItemMeta();
@@ -134,16 +137,33 @@ public class Toggler implements Listener {
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent event){
 		final Player player = event.getPlayer();
-		Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(main, new Runnable() {
-            public void run() {
-            	giveOff(player);
-            	for(Player p : Bukkit.getOnlinePlayers()){
-            		if(p.getInventory().contains(on)){
-            			p.hidePlayer(player);
-            		}
-            	}
-                  }
-          }, 5L);
+		if(players.getConfig().getString(event.getPlayer().getUniqueId().toString()) == null){
+			players.getConfig().set(event.getPlayer().getUniqueId().toString(), "off");
+		}
+		if(players.getConfig().getString(event.getPlayer().getUniqueId().toString()).equalsIgnoreCase("off")){
+			Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(main, new Runnable() {
+	            public void run() {
+	            	giveOff(player);
+	            	for(Player p : Bukkit.getOnlinePlayers()){
+	            		if(p.getInventory().contains(on)){
+	            			p.hidePlayer(player);
+	            		}
+	            	}
+	                  }
+	          }, 5L);	
+		}
+		else{
+			Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(main, new Runnable() {
+	            public void run() {
+	            	giveOn(player);
+	            	for(Player p : Bukkit.getOnlinePlayers()){
+	            		if(p.getInventory().contains(on)){
+	            			p.hidePlayer(player);
+	            		}
+	            	}
+	                  }
+	          }, 5L);
+		}
 	}
 	
 	@EventHandler

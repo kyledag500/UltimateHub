@@ -2,7 +2,6 @@ package me.kyledag500.UltimateHub;
 
 import java.util.ArrayList;
 
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -12,6 +11,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
+
 
 public class main extends JavaPlugin implements Listener{
 	
@@ -25,6 +25,8 @@ public class main extends JavaPlugin implements Listener{
 	
 	private Toggler Toggler;
 	CustomConfig togglerconfig = new CustomConfig(this, "playertoggler.yml");
+	
+	CustomConfig players = new CustomConfig(this, "playerinfo.yml");
 	
 	String prefix = "";
 	
@@ -48,6 +50,7 @@ public class main extends JavaPlugin implements Listener{
 		setupSelector();
 		setupLaunchpads();
 		setupToggler();
+    	players.createIfNoExist();
 		
 		if(getConfig().getString("autoUpdate").equalsIgnoreCase("true")){
 			updater = new Updater(this, 76973, this.getFile(), Updater.UpdateType.DEFAULT, true);
