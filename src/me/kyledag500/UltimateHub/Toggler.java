@@ -40,7 +40,6 @@ public class Toggler implements Listener {
 	}
 	
 	public void setup(){
-		Bukkit.broadcastMessage("TEST");
     	String[] offtype = toggler.getConfig().getString("off.type").split(":");
     	off = new ItemStack(Material.valueOf(offtype[0].toUpperCase()), 1, Short.parseShort(offtype[1]));
     	ItemMeta om = off.getItemMeta();
@@ -139,6 +138,7 @@ public class Toggler implements Listener {
 		final Player player = event.getPlayer();
 		if(players.getConfig().getString(event.getPlayer().getUniqueId().toString()) == null){
 			players.getConfig().set(event.getPlayer().getUniqueId().toString(), "off");
+			players.saveConfig();
 		}
 		if(players.getConfig().getString(event.getPlayer().getUniqueId().toString()).equalsIgnoreCase("off")){
 			Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(main, new Runnable() {

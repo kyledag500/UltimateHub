@@ -213,4 +213,7 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
-/target
+/target/classes/
+/target/surefire/
+/target/maven-archiver/
+/target/generated-resources/

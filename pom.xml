@@ -18,6 +18,7 @@
     			<include>launchpads.yml</include>
     			<include>playertoggler.yml</include>
     			<include>selector.yml</include>
+    			<include>playerinfo.yml</include>
     		</includes>
     	</resource>
     </resources>
