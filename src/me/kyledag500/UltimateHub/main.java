@@ -25,8 +25,11 @@ public class main extends JavaPlugin implements Listener{
 	
 	private Toggler Toggler;
 	CustomConfig togglerconfig = new CustomConfig(this, "playertoggler.yml");
+	CustomConfig playertogglers = new CustomConfig(this, "playerdata/togglers.yml");
 	
-	CustomConfig players = new CustomConfig(this, "playerinfo.yml");
+	private General general;
+	CustomConfig generalplayers = new CustomConfig(this, "playerdata/general.yml");
+	
 	
 	String prefix = "";
 	
@@ -34,23 +37,15 @@ public class main extends JavaPlugin implements Listener{
 	Updater updater = null;
 	
 	public void onEnable(){
-		getConfig();
-		getConfig().addDefault("prefix", "&f[&4Ultimate&6Hub&f]");
-		getConfig().addDefault("clearInvOnJoin", "true");
-		getConfig().addDefault("autoUpdate", "true");
-		getConfig().options().copyDefaults(true);
-		saveConfig();
-		
-		prefix = ChatColor.translateAlternateColorCodes('&', getConfig().getString("prefix")) + " ";
-		
+		saveConfig();		
 		Bukkit.getPluginManager().registerEvents(this, this);		
         getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
         
-		
+		setupGeneral();
+		prefix = ChatColor.translateAlternateColorCodes('&', getConfig().getString("prefix")) + " ";
 		setupSelector();
 		setupLaunchpads();
 		setupToggler();
-    	players.createIfNoExist();
 		
 		if(getConfig().getString("autoUpdate").equalsIgnoreCase("true")){
 			updater = new Updater(this, 76973, this.getFile(), Updater.UpdateType.DEFAULT, true);
@@ -59,12 +54,14 @@ public class main extends JavaPlugin implements Listener{
 		else{
 			Bukkit.getConsoleSender().sendMessage(prefix + ChatColor.RED + "You have disabled the UltimateHub auto updater. This is not recomended. You can re-enable it from the config.");
 		}
+
 		
 	}
 	
 	public void setupToggler(){
 		Toggler = new Toggler(this);
     	togglerconfig.createIfNoExist();
+    	playertogglers.createIfNoExist();
 		if(!togglerconfig.getConfig().getString("enabled").equalsIgnoreCase("false")){
 			Bukkit.getPluginManager().registerEvents(Toggler, this);
 			Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
@@ -88,6 +85,12 @@ public class main extends JavaPlugin implements Listener{
 		}
 	}
 	
+	public void setupGeneral(){
+		general = new General(this, this);
+		Bukkit.getPluginManager().registerEvents(general, this);
+    	generalplayers.createIfNoExist();
+	}
+	
 	public void setupSelector(){
 		selector = new Selector(this);
     	selectorconfig.createIfNoExist();
@@ -101,11 +104,8 @@ public class main extends JavaPlugin implements Listener{
 		}
 	}
 	
-	@EventHandler(priority = EventPriority.HIGHEST)
+	//@EventHandler(priority = EventPriority.HIGHEST)
 	public void onPlayerJoin(PlayerJoinEvent event){
-		if(getConfig().getString("clearInvOnJoin").equalsIgnoreCase("true")){
-			event.getPlayer().getInventory().clear();
-		}
 		if(event.getPlayer().hasPermission("update.inform")){
 			if(getConfig().getString("autoUpdate").equalsIgnoreCase("true")){
 				Updater.UpdateResult result = updater.getResult();

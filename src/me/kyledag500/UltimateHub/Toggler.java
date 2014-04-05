@@ -33,10 +33,10 @@ public class Toggler implements Listener {
 	String prefix = null;
 
 	public Toggler(main plugin){
-		this.main = plugin;
+		main = plugin;
 		toggler = main.togglerconfig;
 		prefix = main.prefix;
-		players = main.players;
+		players = main.playertogglers;
 	}
 	
 	public void setup(){
@@ -140,11 +140,11 @@ public class Toggler implements Listener {
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent event){
 		final Player player = event.getPlayer();
-		if(players.getConfig().getString(event.getPlayer().getUniqueId().toString() + ".toggler") == null){
-			players.getConfig().set(event.getPlayer().getUniqueId().toString() + ".toggler", "off");
+		if(players.getConfig().getString(event.getPlayer().getUniqueId().toString()) == null){
+			players.getConfig().set(event.getPlayer().getUniqueId().toString(), "off");
 			players.saveConfig();
 		}
-		if(players.getConfig().getString(event.getPlayer().getUniqueId().toString() + ".toggler").equalsIgnoreCase("off")){
+		if(players.getConfig().getString(event.getPlayer().getUniqueId().toString() + "").equalsIgnoreCase("off")){
 			Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(main, new Runnable() {
 	            public void run() {
 	            	giveOff(player);
