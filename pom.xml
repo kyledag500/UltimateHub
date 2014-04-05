@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.techkinggames.hub</groupId>
   <artifactId>UltimateHub</artifactId>
-  <version>0.1.1-SNAPSHOT</version>
+  <version>1.2.3</version>
   <name>UltimateHub</name>
   <description>The BEST hub plugin.</description>
   <build>

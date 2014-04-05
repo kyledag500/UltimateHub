@@ -75,6 +75,8 @@ public class Toggler implements Listener {
 				player.playSound(player.getLocation(), Sound.valueOf(toggler.getConfig().getString("sound").toUpperCase()), 1, 1);
 			}
 			player.sendMessage(prefix + ChatColor.translateAlternateColorCodes('&', toggler.getConfig().getString("off.message")));
+			players.getConfig().set(player.getUniqueId().toString(), "off");
+			players.saveConfig();
 			Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(main, new Runnable() {
 	            public void run() {
 	    			player.getInventory().setItem(Integer.parseInt(toggler.getConfig().getString("slot")), off);
@@ -105,6 +107,8 @@ public class Toggler implements Listener {
 			if(!toggler.getConfig().getString("sound").equalsIgnoreCase("none")){
 				player.playSound(player.getLocation(), Sound.valueOf(toggler.getConfig().getString("sound").toUpperCase()), 1, 1);
 			}
+			players.getConfig().set(player.getUniqueId().toString(), "on");
+			players.saveConfig();
 			player.sendMessage(prefix + ChatColor.translateAlternateColorCodes('&', toggler.getConfig().getString("on.message")));
 			Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(main, new Runnable() {
 	            public void run() {
@@ -136,11 +140,11 @@ public class Toggler implements Listener {
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent event){
 		final Player player = event.getPlayer();
-		if(players.getConfig().getString(event.getPlayer().getUniqueId().toString()) == null){
-			players.getConfig().set(event.getPlayer().getUniqueId().toString(), "off");
+		if(players.getConfig().getString(event.getPlayer().getUniqueId().toString() + ".toggler") == null){
+			players.getConfig().set(event.getPlayer().getUniqueId().toString() + ".toggler", "off");
 			players.saveConfig();
 		}
-		if(players.getConfig().getString(event.getPlayer().getUniqueId().toString()).equalsIgnoreCase("off")){
+		if(players.getConfig().getString(event.getPlayer().getUniqueId().toString() + ".toggler").equalsIgnoreCase("off")){
 			Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(main, new Runnable() {
 	            public void run() {
 	            	giveOff(player);
